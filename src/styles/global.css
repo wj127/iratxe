@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme {
+  /* Core colours */
+  --color-background: #faf8f4;
+  --color-foreground: #1e1a18;
+  --color-muted: #6b625e;
+  --color-brand: #b81f26;
+  --color-basque-red: #d52b1e;
+  --color-accent-gold: #f2a900;
+
+  /* Badge / tag colours */
+  --color-canarias: #007bc4;
+  --color-canarias-muted: rgb(0 123 196 / 0.1);
+  --color-canary-blue: #007dc6;
+  --color-canary-yellow: #f9c013;
+  --color-craft: #009a44;
+  --color-craft-muted: rgb(0 154 68 / 0.1);
+
+  /* Neutral / surface colours */
+  --color-surface: #ffffff;
+  --color-border: #ebe5df;
+  --color-subtle-fill: rgb(30 26 24 / 0.05);
+  --color-clear-button: rgb(30 26 24 / 0.1);
+  --color-image-overlay: rgb(0 0 0 / 0.4);
+  --color-hero-overlay: rgb(0 0 0 / 0.5);
+  --color-card-tag: rgb(255 255 255 / 0.2);
+  --color-daily-recommend: rgb(184 31 38 / 0.05);
+
+  /* Typography */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --text-hero-brand: 4rem;
+  --text-hero-brand--line-height: 3.75rem;
+  --text-page-title: 1.75rem;
+  --text-page-title--line-height: 1.2;
+  --text-section-heading: 1.375rem;
+  --text-section-heading--line-height: 1.2;
+  --text-welcome-subtitle: 1.5rem;
+  --text-welcome-subtitle--line-height: 1.2;
+  --text-search-results: 1.25rem;
+  --text-search-results--line-height: 1.2;
+  --text-menu-item: 1.125rem;
+  --text-menu-item--line-height: 1.2;
+  --text-daily-title: 1rem;
+  --text-daily-title--line-height: 1.2;
+  --text-hero-tagline: 1.25rem;
+  --text-hero-tagline--line-height: 1.2;
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.5;
+  --text-menu-desc: 0.875rem;
+  --text-menu-desc--line-height: 1.4;
+  --text-input: 0.9375rem;
+  --text-input--line-height: 1.2;
+  --text-cta: 1rem;
+  --text-cta--line-height: 1.2;
+  --text-price: 1rem;
+  --text-price--line-height: 1.2;
+  --text-status-time: 0.875rem;
+  --text-status-time--line-height: 1.2;
+  --text-section-label: 0.8125rem;
+  --text-section-label--line-height: 1.2;
+  --text-chip: 0.8125rem;
+  --text-chip--line-height: 1.2;
+  --text-section-badge: 0.875rem;
+  --text-section-badge--line-height: 1.2;
+  --text-item-count: 0.75rem;
+  --text-item-count--line-height: 1.2;
+  --text-serving-label: 0.6875rem;
+  --text-serving-label--line-height: 1.2;
+  --text-card-tag: 0.6875rem;
+  --text-card-tag--line-height: 1.2;
+  --text-heritage: 0.625rem;
+  --text-heritage--line-height: 1.2;
+  --text-origin-badge: 0.625rem;
+  --text-origin-badge--line-height: 1.2;
+
+  /* Spacing */
+  --spacing-page: 1.25rem;
+  --spacing-welcome: 1.5rem;
+  --spacing-hero: 2rem;
+  --spacing-section: 1.5rem;
+  --spacing-content: 1.25rem;
+  --spacing-card: 0.75rem;
+  --spacing-row: 1rem;
+  --spacing-element-sm: 0.25rem;
+  --spacing-badge: 0.5rem;
+  --spacing-price: 0.75rem;
+  --spacing-heritage: 0.25rem;
+
+  /* Layout */
+  --spacing-header: 3.5rem;
+  --spacing-status-bar: 2.75rem;
+  --spacing-content-offset: 6.25rem;
+  --spacing-category-card: 8.75rem;
+  --spacing-cta-height: 3.5rem;
+  --width-mobile: 24.375rem;
+
+  /* Border radius */
+  --radius-cta: 1.75rem;
+  --radius-chip: 1.25rem;
+  --radius-search-btn: 1.125rem;
+  --radius-card: 1rem;
+  --radius-back-btn: 1rem;
+  --radius-result-card: 1rem;
+  --radius-daily-recommend: 0.75rem;
+  --radius-input: 0.75rem;
+  --radius-clear: 0.625rem;
+  --radius-heritage: 0.375rem;
+  --radius-origin: 0.25rem;
+  --radius-flag: 0.0625rem;
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+
+@utility font-display-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+
+@utility font-ui {
+  font-family: var(--font-sans);
+  font-variation-settings: "opsz" 14;
+}
+
+@layer base {
+  html,
+  body {
+    @apply m-0 min-h-full w-full bg-background font-ui text-foreground antialiased;
+  }
+}
