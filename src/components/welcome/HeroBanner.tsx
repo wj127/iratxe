@@ -1,5 +1,5 @@
 import heroBannerUrl from '../../assets/hero-banner.png?url';
-import { HeritageBadge } from './HeritageBadge';
+import { HeritageBadge } from '../ui/HeritageBadge';
 
 export function HeroBanner() {
   return (

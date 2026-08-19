@@ -1,5 +1,7 @@
 import Anisette from '../assets/categories/anisette_liquor.png';
 import Gin from '../assets/categories/ginebras.png';
+import Refrescos from '../assets/categories/refrescos.png';
+import Infusiones from '../assets/categories/infusiones.png';
 
 export type Category = {
     category_id: string;
@@ -28,14 +30,14 @@ export const CATEGORIES: Category[] = [
         category_id: "8c762215-9c50-4f6e-aae2-28e748de77ce",
         name: "Refrescos",
         items_count: 11,
-        image_url: null,
+        image_url: Refrescos,
         type: 'drink',
     },
     {
         category_id: "752714ec-dcbf-4db0-86da-249a82ff6259",
         name: "Infusiones",
         items_count: 5,
-        image_url: null,
+        image_url: Infusiones,
         type: 'drink',
     },
     {
