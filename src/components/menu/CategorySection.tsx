@@ -1,9 +1,9 @@
-import type { Category } from '../../constants/categories';
+import type { CategoryWithOptimizedImage } from '../../constants/categories';
 import { CategoryCard } from './CategoryCard';
 
 type CategorySectionProps = {
   title: string;
-  categories: Category[];
+  categories: CategoryWithOptimizedImage[];
 };
 
 export function CategorySection({ title, categories }: CategorySectionProps) {

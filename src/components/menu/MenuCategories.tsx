@@ -1,5 +1,5 @@
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import { CATEGORIES, type Category } from '../../constants/categories';
+import { type Category, type CategoryWithOptimizedImage } from '../../constants/categories';
 import { MenuHeader } from './MenuHeader';
 // import { DailyRecommendation } from './DailyRecommendation';
 import { CategorySection } from './CategorySection';
@@ -10,7 +10,7 @@ const SECTIONS: { type: Category['type']; title: string }[] = [
   { type: 'other', title: 'Otros / Others' },
 ];
 
-export function MenuCategories() {
+export function MenuCategories({ categories }: { categories: CategoryWithOptimizedImage[] }) {
   return (
     <div className="mx-auto flex h-dvh w-full max-w-mobile flex-col bg-background">
       <MenuHeader />
@@ -18,7 +18,7 @@ export function MenuCategories() {
         <ScrollArea.Viewport className="size-full">
           <div className="flex flex-col gap-section p-page">
             {SECTIONS.map(({ type, title }) => {
-              const sectionCategories = CATEGORIES.filter((category) => category.type === type);
+              const sectionCategories = categories.filter((category) => category.type === type);
 
               if (sectionCategories.length === 0) {
                 return null;

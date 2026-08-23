@@ -1,8 +1,22 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { MenuCategories } from '../components/menu/MenuCategories';
+import Layout from "../layouts/Layout.astro";
+import { MenuCategories } from "../components/menu/MenuCategories";
+import { CATEGORIES } from "../constants/categories";
+import { getImage } from "astro:assets";
+
+const categories = await Promise.all(
+  CATEGORIES.map(async (category) => ({
+    ...category,
+    image_url: await getImage({
+      src: category.image_url ?? '',
+      widths: [360, 720],
+      sizes: "(max-width: 390px) 100vw, 350px",
+      format: "webp",
+    }) as Awaited<ReturnType<typeof getImage>>,
+  })),
+);
 ---
 
 <Layout title="Carta / Menu — Iratxe">
-	<MenuCategories client:load />
+  <MenuCategories categories={categories} client:load />
 </Layout>

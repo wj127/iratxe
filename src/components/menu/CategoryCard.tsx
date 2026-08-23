@@ -1,19 +1,19 @@
-import type { Category } from '../../constants/categories';
+import type { CategoryWithOptimizedImage } from '../../constants/categories';
 
-const FALLBACK_GRADIENTS: Record<Category['type'], string> = {
+const FALLBACK_GRADIENTS: Record<CategoryWithOptimizedImage['type'], string> = {
   drink: 'bg-gradient-to-br from-brand to-[#7a1519]',
   food: 'bg-gradient-to-br from-[#c98a1e] to-[#7a4a06]',
   other: 'bg-gradient-to-br from-muted to-foreground',
 };
 
-const TYPE_LABELS: Record<Category['type'], string> = {
+const TYPE_LABELS: Record<CategoryWithOptimizedImage['type'], string> = {
   drink: 'Bebidas',
   food: 'Comida',
   other: 'Otros',
 };
 
 type CategoryCardProps = {
-  category: Category;
+  category: CategoryWithOptimizedImage;
 };
 
 export function CategoryCard({ category }: CategoryCardProps) {
@@ -27,7 +27,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {image_url ? (
           <>
-            <img src={image_url.src} alt="" className="absolute inset-0 size-full object-cover" />
+            <img srcSet={image_url.srcSet.attribute || undefined} {...image_url.attributes} alt={name} className="absolute inset-0 size-full object-cover" />
             <div className="absolute inset-0 bg-image-overlay/35" />
           </>
         ) : (
