@@ -29,6 +29,8 @@ export type CategoryWithOptimizedImage = Omit<Category, 'image_url'> & {
     image_url: Awaited<ReturnType<typeof getImage>>;
 };
 
+export const BOCADILLOS_CATEGORY_ID = '712594ad-1032-4842-b8cc-59dd15f70768';
+
 export const CATEGORIES: Category[] = [
     {
         category_id: "d50c192e-3406-48ad-9091-7d3201d91c1c",

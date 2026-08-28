@@ -1,6 +1,6 @@
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import * as Separator from '@radix-ui/react-separator';
-import type { Category } from '../../constants/categories';
+import { BOCADILLOS_CATEGORY_ID, type Category } from '../../constants/categories';
 import type { Item } from '../../constants/items';
 import { CategoryPageHeader } from './CategoryPageHeader';
 import { MenuItemRow } from './MenuItemRow';
@@ -11,6 +11,8 @@ type CategoryItemsProps = {
 };
 
 export function CategoryItems({ category, items }: CategoryItemsProps) {
+  const isBocadillos = category.category_id === BOCADILLOS_CATEGORY_ID;
+
   return (
     <div className="mx-auto flex h-dvh w-full max-w-mobile flex-col bg-background">
       <CategoryPageHeader title={category.name} />
@@ -32,7 +34,7 @@ export function CategoryItems({ category, items }: CategoryItemsProps) {
                     {index > 0 ? (
                       <Separator.Root decorative className="h-px w-full bg-border" />
                     ) : null}
-                    <MenuItemRow item={item} />
+                    <MenuItemRow item={item} isBocadillos={isBocadillos} />
                   </div>
                 ))}
               </div>
