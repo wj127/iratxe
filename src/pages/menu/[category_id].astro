@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { CategoryItems } from "../../components/menu/CategoryItems";
+import { CATEGORIES } from "../../constants/categories";
+import { getItemsByCategoryId } from "../../constants/items";
+
+export function getStaticPaths() {
+  return CATEGORIES.map((category) => ({
+    params: { category_id: category.category_id },
+    props: {
+      category,
+      items: getItemsByCategoryId(category.category_id),
+    },
+  }));
+}
+
+const { category, items } = Astro.props;
+---
+
+<Layout title={`${category.name} — Iratxe`}>
+  <CategoryItems category={category} items={items} client:load />
+</Layout>

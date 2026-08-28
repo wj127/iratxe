@@ -33,6 +33,12 @@ export type Item = {
     sell_online: boolean;
 };
 
+export function getItemsByCategoryId(categoryId: string) {
+    return ITEMS.filter((item) => item.category_ids.includes(categoryId)).sort((a, b) =>
+        a.name.localeCompare(b.name, 'es'),
+    );
+}
+
 export const ITEMS: Item[] = [
     {
         "item_id": "1b3370d4-777d-4889-93ff-8884eaed055a",
@@ -4056,7 +4062,7 @@ export const ITEMS: Item[] = [
                     "tax_included": true
                 },
                 "options": [],
-                "name": ""
+                "name": "Entero"
             },
             {
                 "variant_id": "46d01f5e-106d-4d1f-8e70-e206bd792d5b",
@@ -4460,7 +4466,7 @@ export const ITEMS: Item[] = [
                     "tax_included": true
                 },
                 "options": [],
-                "name": ""
+                "name": "Entero"
             },
             {
                 "variant_id": "bbfa3306-7d2a-42db-8d64-9edc15b8a054",
