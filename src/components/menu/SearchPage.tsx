@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import * as Separator from '@radix-ui/react-separator';
 import { BOCADILLOS_CATEGORY_ID } from '../../constants/categories';
+import { localizeCategory, localizeExtraName, localizeItem } from '../../i18n/content';
+import { LanguageProvider, useLocale } from '../../i18n/LanguageContext';
 import { normalizeText } from '../../utils/helpers';
 import { CategoryCard } from './CategoryCard';
 import { ExtraRow } from './ExtraRow';
@@ -9,49 +11,58 @@ import { MenuItemRow } from './MenuItemRow';
 import { SearchHeader } from './SearchHeader';
 import type { SearchExtra, SearchPageProps } from './SearchPage.types';
 
-export function SearchPage({ categories, items, extras }: SearchPageProps) {
+function SearchPageContent({ categories, items, extras }: SearchPageProps) {
+  const { locale, translate } = useLocale();
   const [query, setQuery] = useState('');
   const normalizedQuery = normalizeText(query);
+
+  const localizedCategories = useMemo(
+    () => categories.map((category) => localizeCategory(category, locale)),
+    [categories, locale],
+  );
 
   const flatExtras = useMemo<SearchExtra[]>(() => {
     return extras.flatMap((group) => {
       const categoryName =
-        categories.find((category) => category.category_id === group.category_id)?.name ?? '';
+        localizedCategories.find((category) => category.category_id === group.category_id)?.name ??
+        '';
 
       return group.extras.map((extra) => ({
         modifier_id: extra.modifier_id,
-        name: extra.name,
+        name: localizeExtraName(extra.modifier_id, extra.name, locale),
         price: extra.price,
         categoryName,
       }));
     });
-  }, [categories, extras]);
+  }, [extras, localizedCategories, locale]);
 
   const { matchedCategories, matchedItems, matchedExtras } = useMemo(() => {
     if (normalizedQuery.length === 0) {
       return { matchedCategories: [], matchedItems: [], matchedExtras: [] };
     }
 
-    const matchedCategories = categories.filter((category) =>
+    const matchedCategories = localizedCategories.filter((category) =>
       [category.name, category.heading, category.subtitle].some((field) =>
         normalizeText(field).includes(normalizedQuery),
       ),
     );
 
     const matchedItems = items
-      .filter((item) =>
-        [item.name, item.description].some((field) =>
+      .filter((item) => {
+        const localized = localizeItem(item, locale);
+
+        return [localized.name, item.name, localized.description].some((field) =>
           normalizeText(field).includes(normalizedQuery),
-        ),
-      )
-      .sort((a, b) => a.name.localeCompare(b.name, 'es'));
+        );
+      })
+      .sort((a, b) => localizeItem(a, locale).name.localeCompare(localizeItem(b, locale).name, 'es'));
 
     const matchedExtras = flatExtras.filter((extra) =>
       normalizeText(extra.name).includes(normalizedQuery),
     );
 
     return { matchedCategories, matchedItems, matchedExtras };
-  }, [normalizedQuery, categories, items, flatExtras]);
+  }, [normalizedQuery, localizedCategories, items, flatExtras, locale]);
 
   const hasQuery = normalizedQuery.length > 0;
   const hasResults =
@@ -64,21 +75,19 @@ export function SearchPage({ categories, items, extras }: SearchPageProps) {
         <ScrollArea.Viewport className="size-full">
           <div className="flex flex-col gap-section p-page">
             {!hasQuery ? (
-              <p className="font-ui text-menu-desc font-normal text-muted">
-                Escribe para buscar en categorías, artículos y extras.
-              </p>
+              <p className="font-ui text-menu-desc font-normal text-muted">{translate('searchHint')}</p>
             ) : null}
 
             {hasQuery && !hasResults ? (
               <p className="font-ui text-menu-desc font-normal text-muted">
-                No hay resultados para “{query.trim()}”.
+                {translate('searchNoResults', { query: query.trim() })}
               </p>
             ) : null}
 
             {matchedCategories.length > 0 ? (
               <section className="flex w-full flex-col gap-3">
                 <h2 className="font-display text-section-heading font-bold text-foreground">
-                  Categorías
+                  {translate('resultsCategories')}
                 </h2>
                 {matchedCategories.map((category) => (
                   <CategoryCard key={category.category_id} category={category} />
@@ -89,7 +98,7 @@ export function SearchPage({ categories, items, extras }: SearchPageProps) {
             {matchedItems.length > 0 ? (
               <section className="flex w-full flex-col gap-3">
                 <h2 className="font-display text-section-heading font-bold text-foreground">
-                  Artículos
+                  {translate('resultsItems')}
                 </h2>
                 <div className="flex w-full flex-col">
                   {matchedItems.map((item, index) => (
@@ -110,7 +119,7 @@ export function SearchPage({ categories, items, extras }: SearchPageProps) {
             {matchedExtras.length > 0 ? (
               <section className="flex w-full flex-col gap-3">
                 <h2 className="font-display text-section-heading font-bold text-foreground">
-                  Extras
+                  {translate('resultsExtras')}
                 </h2>
                 {matchedExtras.map((extra) => (
                   <ExtraRow
@@ -132,5 +141,13 @@ export function SearchPage({ categories, items, extras }: SearchPageProps) {
         </ScrollArea.Scrollbar>
       </ScrollArea.Root>
     </div>
+  );
+}
+
+export function SearchPage({ categories, items, extras }: SearchPageProps) {
+  return (
+    <LanguageProvider>
+      <SearchPageContent categories={categories} items={items} extras={extras} />
+    </LanguageProvider>
   );
 }

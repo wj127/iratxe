@@ -1,7 +1,10 @@
 import heroBannerUrl from '../../assets/hero-banner.png?url';
-import { HeritageBadge } from '../ui/HeritageBadge';
+import { useLocale } from '../../i18n/LanguageContext';
+import { LanguageSelect } from '../ui/LanguageSelect';
 
 export function HeroBanner() {
+  const { translate } = useLocale();
+
   return (
     <div className="relative flex h-[460px] w-full flex-col justify-between overflow-hidden p-hero">
       <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -10,7 +13,7 @@ export function HeroBanner() {
       </div>
 
       <div className="relative flex items-center">
-        <HeritageBadge />
+        <LanguageSelect />
       </div>
 
       <div className="relative flex w-full flex-col gap-card">
@@ -19,7 +22,7 @@ export function HeroBanner() {
         </h1>
         <div className="h-[2px] w-full bg-accent-gold" />
         <p className="font-ui text-hero-tagline font-medium text-white opacity-90 whitespace-nowrap">
-          Basque soul, island spirit
+          {translate('heroTagline')}
         </p>
       </div>
     </div>

@@ -20,5 +20,5 @@ const { category, items, extras } = Astro.props;
 ---
 
 <Layout title={`${category.name} — Iratxe`}>
-  <CategoryItems category={category} items={items} extras={extras} client:load />
+  <CategoryItems category={category} items={items} extras={extras} client:only="react" />
 </Layout>

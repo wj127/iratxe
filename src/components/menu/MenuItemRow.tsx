@@ -1,4 +1,6 @@
 import type { Item } from '../../constants/items';
+import { localizeItem } from '../../i18n/content';
+import { useLocale } from '../../i18n/LanguageContext';
 import { formatEuro } from '../../utils/helpers';
 
 type MenuItemRowProps = {
@@ -6,7 +8,9 @@ type MenuItemRowProps = {
   isBocadillos: boolean;
 };
 
-export function MenuItemRow({ item, isBocadillos }: MenuItemRowProps) {
+export function MenuItemRow({ item: baseItem, isBocadillos }: MenuItemRowProps) {
+  const { locale } = useLocale();
+  const item = localizeItem(baseItem, locale);
   const description = item.description.trim();
 
   const header = (

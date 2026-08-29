@@ -1,4 +1,6 @@
 import type { CategoryWithOptimizedImage } from '../../constants/categories';
+import { useLocale } from '../../i18n/LanguageContext';
+import type { UIStringKey } from '../../i18n/ui';
 
 const FALLBACK_GRADIENTS: Record<CategoryWithOptimizedImage['type'], string> = {
   drink: 'bg-gradient-to-br from-brand to-[#7a1519]',
@@ -6,10 +8,10 @@ const FALLBACK_GRADIENTS: Record<CategoryWithOptimizedImage['type'], string> = {
   other: 'bg-gradient-to-br from-muted to-foreground',
 };
 
-const TYPE_LABELS: Record<CategoryWithOptimizedImage['type'], string> = {
-  drink: 'Bebidas',
-  food: 'Comida',
-  other: 'Otros',
+const TYPE_LABEL_KEYS: Record<CategoryWithOptimizedImage['type'], UIStringKey> = {
+  drink: 'typeDrink',
+  food: 'typeFood',
+  other: 'typeOther',
 };
 
 type CategoryCardProps = {
@@ -17,6 +19,7 @@ type CategoryCardProps = {
 };
 
 export function CategoryCard({ category }: CategoryCardProps) {
+  const { translate } = useLocale();
   const { name, items_count, image_url, type, category_id } = category;
 
   return (
@@ -37,10 +40,10 @@ export function CategoryCard({ category }: CategoryCardProps) {
 
       <div className="relative flex w-full items-start justify-between">
         <span className="rounded-heritage bg-card-tag px-2 py-1 font-ui text-card-tag font-bold uppercase text-white">
-          {TYPE_LABELS[type]}
+          {translate(TYPE_LABEL_KEYS[type])}
         </span>
         <span className="font-ui text-item-count font-bold text-white opacity-90">
-          {items_count} items
+          {items_count} {translate('itemsLabel')}
         </span>
       </div>
 

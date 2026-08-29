@@ -18,5 +18,5 @@ const categories = await Promise.all(
 ---
 
 <Layout title="Carta / Menu — Iratxe">
-  <MenuCategories categories={categories} client:load />
+  <MenuCategories categories={categories} client:only="react" />
 </Layout>

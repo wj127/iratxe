@@ -1,8 +1,11 @@
+import { LanguageProvider, useLocale } from '../../i18n/LanguageContext';
 import { Button } from '../ui/Button';
 import { ArrowRightIcon } from '../icons';
 import { HeroBanner } from './HeroBanner';
 
-export function WelcomeLanding() {
+function WelcomeLandingContent() {
+  const { translate } = useLocale();
+
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-mobile flex-col justify-between bg-background">
       <div className="flex w-full flex-col">
@@ -11,19 +14,26 @@ export function WelcomeLanding() {
 
       <div className="flex w-full flex-col items-center gap-content p-welcome">
         <h2 className="w-full text-center font-display text-welcome-subtitle font-bold text-foreground">
-          Taberna Euskalduna en el Atlántico
+          {translate('welcomeSubtitle')}
         </h2>
         <p className="w-full text-center font-ui text-body font-normal text-muted">
-          Traditional Basque pintxos, premium local Canarian craft beers, and selected wines with
-          ocean breezes.
+          {translate('welcomeDescription')}
         </p>
         <Button asChild>
           <a href="/menu">
-            Ver Carta / See Menu
+            {translate('ctaSeeMenu')}
             <ArrowRightIcon className="size-[18px]" />
           </a>
         </Button>
       </div>
     </div>
+  );
+}
+
+export function WelcomeLanding() {
+  return (
+    <LanguageProvider>
+      <WelcomeLandingContent />
+    </LanguageProvider>
   );
 }

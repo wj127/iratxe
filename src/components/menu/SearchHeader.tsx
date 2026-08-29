@@ -1,3 +1,4 @@
+import { useLocale } from '../../i18n/LanguageContext';
 import { ChevronLeftIcon, SearchIcon } from '../icons';
 
 type SearchHeaderProps = {
@@ -6,11 +7,13 @@ type SearchHeaderProps = {
 };
 
 export function SearchHeader({ value, onChange }: SearchHeaderProps) {
+  const { translate } = useLocale();
+
   return (
     <header className="flex h-header w-full shrink-0 items-center gap-3 border-b border-border bg-background px-page">
       <a
         href="/menu"
-        aria-label="Volver a la carta"
+        aria-label={translate('backAria')}
         className="flex size-8 shrink-0 items-center justify-center rounded-back-btn bg-subtle-fill text-foreground outline-none transition-colors hover:bg-clear-button focus-visible:ring-2 focus-visible:ring-brand/40"
       >
         <ChevronLeftIcon className="size-4" />
@@ -21,8 +24,8 @@ export function SearchHeader({ value, onChange }: SearchHeaderProps) {
           type="search"
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          placeholder="Buscar en la carta..."
-          aria-label="Buscar en la carta"
+          placeholder={translate('searchPlaceholder')}
+          aria-label={translate('searchInputAria')}
           autoFocus
           className="min-w-0 flex-1 bg-transparent font-ui text-input font-normal text-foreground outline-none placeholder:text-muted"
         />
