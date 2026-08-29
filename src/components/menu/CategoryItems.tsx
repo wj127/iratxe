@@ -3,6 +3,7 @@ import * as Separator from '@radix-ui/react-separator';
 import { BOCADILLOS_CATEGORY_ID, type Category } from '../../constants/categories';
 import type { Item } from '../../constants/items';
 import { CategoryPageHeader } from './CategoryPageHeader';
+import { CategoryExtras } from './CategoryExtras';
 import { MenuItemRow } from './MenuItemRow';
 import type { Extra } from '../../constants/extras';
 
@@ -41,6 +42,7 @@ export function CategoryItems({ category, items, extras }: CategoryItemsProps) {
                 ))}
               </div>
             )}
+            <CategoryExtras extras={extras} />
           </div>
         </ScrollArea.Viewport>
         <ScrollArea.Scrollbar

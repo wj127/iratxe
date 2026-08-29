@@ -1,13 +1,10 @@
 import type { Item } from '../../constants/items';
+import { formatEuro } from '../../utils/helpers';
 
 type MenuItemRowProps = {
   item: Item;
   isBocadillos: boolean;
 };
-
-function formatEuro(cents: number) {
-  return `€${(cents / 100).toFixed(2)}`;
-}
 
 export function MenuItemRow({ item, isBocadillos }: MenuItemRowProps) {
   const description = item.description.trim();
