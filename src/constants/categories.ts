@@ -1,4 +1,4 @@
-import Anisette from '../assets/categories/anisette_liquor.png';
+import Anisette from '../assets/categories/anisette.png';
 import Gin from '../assets/categories/ginebras.png';
 import Refrescos from '../assets/categories/refrescos.png';
 import Infusiones from '../assets/categories/infusiones.png';
