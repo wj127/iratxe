@@ -4,13 +4,15 @@ import { BOCADILLOS_CATEGORY_ID, type Category } from '../../constants/categorie
 import type { Item } from '../../constants/items';
 import { CategoryPageHeader } from './CategoryPageHeader';
 import { MenuItemRow } from './MenuItemRow';
+import type { Extra } from '../../constants/extras';
 
 type CategoryItemsProps = {
   category: Category;
   items: Item[];
+  extras: Extra['extras'];
 };
 
-export function CategoryItems({ category, items }: CategoryItemsProps) {
+export function CategoryItems({ category, items, extras }: CategoryItemsProps) {
   const isBocadillos = category.category_id === BOCADILLOS_CATEGORY_ID;
 
   return (

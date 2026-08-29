@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { CategoryItems } from "../../components/menu/CategoryItems";
 import { CATEGORIES } from "../../constants/categories";
+import { EXTRAS } from "../../constants/extras";
 import { getItemsByCategoryId } from "../../constants/items";
 
 export function getStaticPaths() {
@@ -10,13 +11,14 @@ export function getStaticPaths() {
     props: {
       category,
       items: getItemsByCategoryId(category.category_id),
+      extras: EXTRAS.find((extra) => extra.category_id === category.category_id)?.extras || [],
     },
   }));
 }
 
-const { category, items } = Astro.props;
+const { category, items, extras } = Astro.props;
 ---
 
 <Layout title={`${category.name} — Iratxe`}>
-  <CategoryItems category={category} items={items} client:load />
+  <CategoryItems category={category} items={items} extras={extras} client:load />
 </Layout>
