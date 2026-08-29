@@ -20,7 +20,7 @@ export function CategoryExtras({ extras }: CategoryExtrasProps) {
         <h2 className="font-display-italic text-section-heading font-bold text-brand">
           {translate('extrasTitle')}
         </h2>
-        <p className="font-ui text-menu-desc font-normal text-muted">{t('extrasSubtitle')}</p>
+        <p className="font-ui text-menu-desc font-normal text-muted">{translate('extrasSubtitle')}</p>
       </div>
       <ul className="flex flex-col gap-badge">
         {extras.map((extra) => (
